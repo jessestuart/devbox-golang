@@ -2,15 +2,15 @@
 - hosts: all
   become: true
   vars:
-      home: /home/ubuntu
+      home: /home/vagrant
       document_root: /vagrant
       os: ubuntu
-      user: ubuntu
+      user: vagrant
       osversioncode: xenial
   gather_facts: no
   pre_tasks:
-      - name: 'install python2'
-        raw: sudo apt-get -y install python-simplejson
+      - name: Install sudo
+        apt: name=sudo state=installed
       - name: Symlink sh to bash rather than dash
         file: src=/bin/bash dest=/bin/sh state=link force=true
       - name: Update apt cache and optionally upgrade
@@ -21,17 +21,18 @@
       - name: Install stuff from Aptitude
         apt: name={{ item }} state=installed
         with_items:
-         - git
-         - tig
-         - vim
-         - gdb
-         - cgdb
          - bash-completion # Not included in the docker image
-         - make
-         - tree
+         - cgdb
+         - gdb
+         - git
          - htop
-         - tmux
+         - make
          - man-db
+         - python-simplejson
+         - tig
+         - tmux
+         - tree
+         - vim
   roles:
       - { role: dotfiles, become: false }
       - { role: golang, become: false }

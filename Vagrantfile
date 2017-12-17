@@ -26,7 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # --------------------------------------------------------------------
   # Definitions for the Docker container
   # --------------------------------------------------------------------
-  #config.vm.define "docker", autostart: false do |dkr|
+  #config.vm.define "docker", autostart: true do |dkr|
   #  system("bash genkeys.sh")
   #  dkr.vm.provider "docker" do |d|
   #    d.has_ssh = true
@@ -39,7 +39,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #  dkr.vm.provision :ansible do |ansible|
   #    ansible.playbook = "playbook.yml"
   #    ansible.extra_vars = { ansible_ssh_user: 'vagrant' }
-  #    #ansible.verbose = "vvvv"
+  #    # ansible.verbose = "vvvv"
   #  end
   #  dkr.vm.synced_folder ".", "/vagrant"
   #  # Tell the user what to do next
